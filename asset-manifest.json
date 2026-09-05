@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/SkySnap-Weather/static/css/main.49025e4b.css",
-    "main.js": "/SkySnap-Weather/static/js/main.185391d8.js",
+    "main.js": "/SkySnap-Weather/static/js/main.588886a1.js",
     "static/js/453.15c8c274.chunk.js": "/SkySnap-Weather/static/js/453.15c8c274.chunk.js",
     "static/media/weather.mp4": "/SkySnap-Weather/static/media/weather.6d8367020b804366d8f3.mp4",
     "static/media/bootstrap.min.css.map": "/SkySnap-Weather/static/media/bootstrap.min.css.24ed20e8476698dafba3.map",
@@ -25,11 +25,11 @@
     "static/media/haze.svg": "/SkySnap-Weather/static/media/haze.810ea7df1f754d9a5e1ac4f7ccad2980.svg",
     "static/media/mist.svg": "/SkySnap-Weather/static/media/mist.212df11cebffa663c362a05c2c5eca25.svg",
     "main.49025e4b.css.map": "/SkySnap-Weather/static/css/main.49025e4b.css.map",
-    "main.185391d8.js.map": "/SkySnap-Weather/static/js/main.185391d8.js.map",
+    "main.588886a1.js.map": "/SkySnap-Weather/static/js/main.588886a1.js.map",
     "453.15c8c274.chunk.js.map": "/SkySnap-Weather/static/js/453.15c8c274.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.49025e4b.css",
-    "static/js/main.185391d8.js"
+    "static/js/main.588886a1.js"
   ]
 }
