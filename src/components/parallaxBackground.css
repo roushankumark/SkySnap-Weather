@@ -1,0 +1,133 @@
+/* ============================================================
+   SkySnap — Living Sky Background System with weather.mp4
+   Full-viewport video background with subtle atmosphere overlays
+   ============================================================ */
+
+/* ── Root wrapper ── */
+.parallax-background-container {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  background: #020617;
+}
+
+/* ── Fullscreen Background Video ── */
+.background-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
+  filter: brightness(0.85) contrast(1.05);
+}
+
+.background-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(circle at 50% 30%, rgba(2, 6, 23, 0.20) 0%, rgba(2, 6, 23, 0.50) 100%);
+  pointer-events: none;
+}
+
+/* Every condition layer sits above the video;
+   only the .active one fades in with gentle translucent tint */
+.atmosphere-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  z-index: 3;
+  transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+.atmosphere-layer.active { opacity: 0.35; }
+
+/* ── Mesh gradient base (all conditions) ── */
+.mesh-gradient {
+  position: absolute;
+  inset: -10%;
+  width: 120%; height: 120%;
+  animation: sky-breathe 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes sky-breathe {
+  0%   { transform: scale(1)    translate(0,0); }
+  50%  { transform: scale(1.04) translate(-1.5%,1.5%); }
+  100% { transform: scale(1.02) translate(1%,-1%); }
+}
+
+/* ══════════════════════════════════════════════════
+   CONDITION TINTS (TRANSLUCENT — DO NOT COVER VIDEO)
+   ══════════════════════════════════════════════════ */
+.atmosphere-sunny .mesh-gradient {
+  background:
+    radial-gradient(ellipse at 18% 28%, rgba(56,189,248,0.4) 0%, transparent 55%),
+    radial-gradient(ellipse at 82% 18%, rgba(253,224,71,0.25) 0%, transparent 45%);
+}
+
+.atmosphere-cloudy .mesh-gradient {
+  background:
+    radial-gradient(ellipse at 25% 35%, rgba(148,163,184,0.4) 0%, transparent 65%),
+    radial-gradient(ellipse at 75% 65%, rgba(100,116,139,0.3) 0%, transparent 60%);
+}
+
+.atmosphere-rainy .mesh-gradient {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(51,65,85,0.5) 0%, transparent 70%),
+    radial-gradient(ellipse at 70% 80%, rgba(15,23,42,0.4) 0%, transparent 70%);
+}
+.atmosphere-rainy::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    168deg,
+    transparent,
+    transparent 12px,
+    rgba(147,197,253,0.04) 12px,
+    rgba(147,197,253,0.04) 13px
+  );
+  animation: rain-fall 0.65s linear infinite;
+}
+
+.atmosphere-thunderstorm .mesh-gradient {
+  background:
+    radial-gradient(ellipse at 22% 28%, rgba(30,27,75,0.6) 0%, transparent 68%),
+    radial-gradient(ellipse at 78% 72%, rgba(49,46,129,0.4) 0%, transparent 68%);
+  animation: sky-breathe 20s ease-in-out infinite alternate, thunder-flash 9s infinite;
+}
+@keyframes thunder-flash {
+  0%, 93%, 96%, 100% { filter: brightness(1); }
+  94%, 95%           { filter: brightness(1.8); }
+}
+
+.atmosphere-snowy .mesh-gradient {
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(226,232,240,0.4) 0%, transparent 70%),
+    radial-gradient(ellipse at 70% 60%, rgba(203,213,225,0.3) 0%, transparent 60%);
+}
+
+.atmosphere-night .mesh-gradient {
+  background:
+    radial-gradient(ellipse at 78% 18%, rgba(255,255,255,0.15) 0%, transparent 38%),
+    radial-gradient(ellipse at 30% 78%, rgba(30,58,138,0.3) 0%, transparent 60%);
+}
+
+.atmosphere-sunset .mesh-gradient {
+  background:
+    radial-gradient(ellipse at 50% 90%, rgba(249,115,22,0.4) 0%, transparent 58%),
+    radial-gradient(ellipse at 18% 32%, rgba(159,18,57,0.3) 0%, transparent 68%);
+}
+
+/* Rain & Snow animations */
+@keyframes rain-fall {
+  from { background-position: 0 0; }
+  to   { background-position: -14px 100vh; }
+}
+
+@keyframes cloud-drift {
+  from { background-position: 0% 0%, 0% 0%, 0% 0%; }
+  to   { background-position: 8% 2%, -6% -1%, 4% 1%; }
+}
